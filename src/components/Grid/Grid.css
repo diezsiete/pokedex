@@ -1,0 +1,19 @@
+.grid {
+    background-color: white;
+    border-radius: 20px;
+    padding: 24px 12px 12px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    min-height: 400px;
+}
+@media (min-width: 425px) {
+    .grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+@media (min-width: 1024px) {
+    .grid {
+        grid-template-columns: repeat(5, 1fr); /* Change to 5 columns */
+    }
+}

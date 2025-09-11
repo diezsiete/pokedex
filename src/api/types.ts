@@ -10,6 +10,8 @@ export type Pokemon = {
     types: Type[];
 };
 
+export type ListPokemon = Pick<Pokemon, 'id'|'name'|'sprites'>
+
 type Ability = {
     ability: {
         name: string;

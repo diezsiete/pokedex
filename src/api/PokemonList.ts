@@ -1,21 +1,21 @@
 import { type TypedDocumentNode, gql } from "@apollo/client";
 import { useQuery } from "@apollo/client/react";
-import type { Pokemon } from "./types.ts";
+import type { Pokemon, ListPokemon } from "./types.ts";
 
 type ListVars = {
-    where: {[k: string]: string};
-    orderBy: {[k: string]: string};
+    where: {[k: string]: string|object};
+    orderBy: {[k: string]: string}[];
 };
 
-const ListPokemon: TypedDocumentNode<
-    { list: Pokemon[] },
+const POKEMON_LIST: TypedDocumentNode<
+    { pokemons: ListPokemon[] },
     ListVars
 > = gql`
-    query ListPokemon($where: pokemon_bool_exp, $orderBy: [pokemon_order_by!]) {
-        list: pokemon(
+    query PokemonList($where: pokemon_bool_exp, $orderBy: [pokemon_order_by!]) {
+        pokemons: pokemon(
             where: $where
             order_by: $orderBy
-            limit: 10
+            limit: 50
         ) {
             id
             name
@@ -26,11 +26,11 @@ const ListPokemon: TypedDocumentNode<
     }
 `;
 
-export const GetSpecies: TypedDocumentNode<
+export const SPECIES_LIST: TypedDocumentNode<
     { species: { pokemons: Pick<Pokemon, 'id'|'name'|'sprites'>[] }[]},
     ListVars
 > = gql`
-    query GetSpecies($where: pokemonspecies_bool_exp, $orderBy: [pokemonspecies_order_by!]) {
+    query SpeciesList($where: pokemonspecies_bool_exp, $orderBy: [pokemonspecies_order_by!]) {
         species: pokemonspecies(
             where: $where
             order_by: $orderBy
@@ -48,8 +48,8 @@ export const GetSpecies: TypedDocumentNode<
 `;
 
 
-export function useListPokemonQuery(search: string = '', sortField: string = 'name') {
-    const where = {};
+export function usePokemonListQuery(search: string = '', sortField: string = 'name') {
+    const where: ListVars['where'] = {};
     if (search.trim().length > 0) {
         where.name = {
             _like: `${search}%`
@@ -57,7 +57,7 @@ export function useListPokemonQuery(search: string = '', sortField: string = 'na
     }
 
     // Pass the merged object as the 'where' variable.
-    return useQuery(ListPokemon, {
+    return useQuery(POKEMON_LIST, {
         variables: {
             where,
             orderBy: [{[sortField]: 'asc'}]
@@ -65,8 +65,8 @@ export function useListPokemonQuery(search: string = '', sortField: string = 'na
     });
 }
 
-export function useGetSpeciesQuery(search: string = '', sortField: string = 'name') {
-    const where = {
+export function useSpeciesListQuery(search: string = '', sortField: string = 'name') {
+    const where: ListVars['where'] = {
         generation: {name: {_eq: "generation-i"}},
         evolves_from_species_id:  {
             _is_null: true
@@ -79,7 +79,7 @@ export function useGetSpeciesQuery(search: string = '', sortField: string = 'nam
         }
     }
 
-    return useQuery(GetSpecies, {
+    return useQuery(SPECIES_LIST, {
         variables: {
             where,
             orderBy: [{[sortField]: 'asc'}]

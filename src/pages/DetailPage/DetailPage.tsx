@@ -1,8 +1,8 @@
 import { useParams } from "react-router";
 import { useQuery } from "@apollo/client/react";
-import GetPokemon from "./api/GetPokemon.ts";
+import GetPokemon from "../../api/GetPokemon.ts";
 
-export default function PokemonDetailPage() {
+export default function DetailPage() {
     const params = useParams();
     const {loading, error, data} = useQuery(GetPokemon, {
         variables: { name: params.name as string },
