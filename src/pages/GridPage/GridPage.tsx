@@ -1,8 +1,9 @@
 import { useState } from "react";
-import pokeball from '@assets/pokeball.svg'
 import { usePokemonListQuery } from "@api/PokemonList.ts";
 import SearchBar from "@components/SearchBar/SearchBar";
 import Grid from "@components/Grid/Grid.tsx";
+import SortField from "@components/SortField/SortField.tsx";
+import pokeball from '@assets/pokeball.svg'
 import './GridPage.css'
 
 export default function GridPage() {
@@ -16,7 +17,10 @@ export default function GridPage() {
                 <img src={pokeball} alt="Pokeball logo"/>
                 <h1>Pokédex</h1>
             </div>
-            <SearchBar search={search} sortField={sortField} onSearchChange={setSearch} onSortChange={setSortField}/>
+            <div className="filters">
+                <SearchBar search={search} onChange={setSearch} />
+                <SortField field={sortField} onChange={setSortField} />
+            </div>
         </header>
         <main className='grid-page-main inner-shadow'>
             {loading ? (

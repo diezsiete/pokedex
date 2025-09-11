@@ -3,7 +3,6 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Routes, Route } from "react-router";
 import { ApolloProvider } from "@apollo/client/react";
-// import App from './App.tsx'
 import client from "./api/client.ts";
 import GridPage from "./pages/GridPage/GridPage.tsx";
 import DetailPage from "./pages/DetailPage/DetailPage.tsx";

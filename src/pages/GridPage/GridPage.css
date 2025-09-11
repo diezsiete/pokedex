@@ -26,3 +26,9 @@
     margin: 0 5px 5px;
 }
 
+.filters {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    margin-bottom: 20px;
+}

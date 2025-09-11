@@ -1,0 +1,62 @@
+.sort-field {
+    position: relative;
+}
+.sort-field .trigger-button {
+    width: 40px;
+    height: 40px;
+    background-color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.sort-card {
+    display: none;
+    position: absolute;
+    right: 0;
+    z-index: 10;
+    padding: 5px;
+    border-radius: 10px;
+    min-width: 150px;
+    top: 120%;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+.sort-card.shown {
+    display: block;
+}
+
+.sort-card .legend {
+    font-weight: bold;
+    margin: 15px 0 15px 15px;
+}
+
+.sort-card .radio-group {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.sort-card label {
+    display: block;
+    color: #1D1D1D;
+}
+.sort-card label:first-child {
+    margin-bottom: 10px;
+}
+
+.sort-card input {
+    margin-right: 10px;
+}
+
+.sort-field-open-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 9;
+}
+.sort-field-open-overlay.shown {
+    display: block;
+}
