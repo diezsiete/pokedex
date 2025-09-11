@@ -1,15 +1,22 @@
-import { useState } from "react";
-import { usePokemonListQuery } from "@api/PokemonList.ts";
+import { useEffect, useRef, useState } from "react";
+import { useListPokemonQuery, LIMIT } from "@api/ListPokemon.ts";
+import type { PokemonCard } from "@api/types.ts";
 import SearchBar from "@components/SearchBar/SearchBar";
 import Grid from "@components/Grid/Grid.tsx";
 import SortField from "@components/SortField/SortField.tsx";
 import pokeball from '@assets/pokeball.svg'
 import './GridPage.css'
 
+type ApolloResult = ReturnType<typeof useListPokemonQuery>;
+
 export default function GridPage() {
     const [search, setSearch] = useState("");
     const [sortField, setSortField] = useState('name');
-    const {loading, error, data} = usePokemonListQuery(search, sortField);
+    const {loading, error, data, fetchMore} = useListPokemonQuery(search, sortField);
+
+    const pokemons = data?.pokemons ?? []
+
+    const loadMoreRef = useIntersectionObserver(loading, pokemons, fetchMore)
 
     return <div className='main-container grid-page'>
         <header className="grid-page-header">
@@ -23,34 +30,46 @@ export default function GridPage() {
             </div>
         </header>
         <main className='grid-page-main inner-shadow'>
-            {loading ? (
-                <p>Loading...</p>
-            ) : error || !data || !data.pokemons ? (
-                <p>Error :(</p>
-            ) : (
-                <Grid pokemons={data.pokemons} />
-            )}
-            {/*<PokemonSpecies search={search} sortField={sortFieldSelected} />*/}
+            {!pokemons.length || error ? <p>{error ? 'Error :(' : 'Loading...'}</p> : <Grid pokemons={pokemons} />}
+            <div ref={loadMoreRef} className="h-10 col-span-full"></div>
         </main>
     </div>;
 }
 
-// function PokemonSpecies({search = '', sortField = 'name'}: { search?: string; sortField?: string }) {
-//     const {loading, error, data} = useSpeciesListQuery(search, sortField);
-//     if (loading) return <p>Loading...</p>;
-//     if (error || !data || !data.species) return <p>Error :(</p>;
-//
-//     return <>
-//         <ul>
-//             {data.species.map(ps => {
-//                 const p = ps.pokemons[0];
-//                 return <li key={p.id}><Link to={`/${p.name}`}>
-//                     {p.name} —{" #"} {String(p.id).padStart(3, '0')}
-//                     <img width="72" src={p.sprites[0].sprites.other['official-artwork']['front_default']}
-//                          alt="pokemon-reference"/>
-//                 </Link>
-//                 </li>
-//             })}
-//         </ul>
-//     </>;
-// }
+/**
+ * Hook funcionalidad de scroll infinito.
+ * Retorna ref para un elemento que en deteccion de interseccion, se dispare obtener mas pokemones de la api
+ */
+function useIntersectionObserver(loading: boolean, pokemons: PokemonCard[], fetchMore: ApolloResult['fetchMore']) {
+    const loadMoreRef = useRef<HTMLDivElement | null>(null);
+
+
+    useEffect(() => {
+        if (!loadMoreRef.current) return;
+
+        const observer = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting && !loading) {
+                fetchMore({
+                    variables: {
+                        offset: pokemons.length,
+                        limit: LIMIT,
+                    },
+                    updateQuery: (prev, { fetchMoreResult }) => {
+                        if (!fetchMoreResult) return prev;
+                        return {
+                            pokemons: [
+                                ...prev.pokemons,
+                                ...fetchMoreResult.pokemons,
+                            ],
+                        };
+                    },
+                });
+            }
+        });
+
+        observer.observe(loadMoreRef.current);
+        return () => observer.disconnect();
+    }, [loading, pokemons, fetchMore]);
+
+    return loadMoreRef;
+}

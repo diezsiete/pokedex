@@ -1,9 +1,9 @@
 import { Link } from 'react-router'
-import type { ListPokemon } from "@api/types.ts";
+import type { PokemonCard as PokemonCardType } from "@api/types.ts";
 import { formatPokemonName, formatPokemonId } from "@util/format";
 import './PokemonCard.css';
 
-export default function PokemonCard({ pokemon }: { pokemon: ListPokemon }) {
+export default function PokemonCard({ pokemon }: { pokemon: PokemonCardType }) {
     return (
         <Link to={`/${pokemon.name}`} className="pokemon-card">
             <div className="pokemon-half-background"></div>
