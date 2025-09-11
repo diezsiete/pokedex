@@ -22,7 +22,7 @@
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
-
+    "baseUrl": "./",
     "paths": {
       "@api/*": ["src/api/*"],
       "@assets/*": ["src/assets/*"],

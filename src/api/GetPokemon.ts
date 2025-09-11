@@ -5,7 +5,7 @@ type GetPokemonVars = {
     name: string;
 };
 
-const GetPokemon: TypedDocumentNode<
+const GET_POKEMON: TypedDocumentNode<
     {pokemons: Pokemon[]},
     GetPokemonVars
 > = gql`
@@ -47,4 +47,4 @@ const GetPokemon: TypedDocumentNode<
     }
 `;
 
-export default GetPokemon;
+export default GET_POKEMON;

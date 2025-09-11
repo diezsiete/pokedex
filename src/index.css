@@ -8,8 +8,12 @@ body {
   font-family: "Poppins", sans-serif;
   margin: 0;
   height: 100vh;
+}
+
+.main-container {
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
 }
 
 input {
@@ -18,4 +22,115 @@ input {
 
 .inner-shadow {
   box-shadow: 0 1px 3px 1px #00000040 inset;
+}
+
+/*Colores Pókemon Type ---------------------------------------------------------------------------------------------- */
+
+.bug, body:has(> .main-container.bug)  {
+  background-color: #A7B723;
+}
+.bug-color {
+  color: #A7B723;
+}
+.dark, body:has(> .main-container.dark) {
+  background-color: #75574C;
+}
+.dark-color {
+  color: #75574C;
+}
+.dragon, body:has(> .main-container.dragon) {
+  background-color: #7037FF;
+}
+.dragon-color {
+  color: #7037FF;
+}
+.electric, body:has(> .main-container.electric) {
+  background-color: #F9CF30;
+}
+.electric-color {
+  color: #F9CF30;
+}
+.fairy, body:has(> .main-container.fairy) {
+  background-color: #E69EAC;
+}
+.fairy-color {
+  color: #E69EAC;
+}
+.fighting, body:has(> .main-container.fighting) {
+  background-color: #C12239;
+}
+.fighting-color {
+  color: #C12239;
+}
+.fire, body:has(> .main-container.fire) {
+  background-color: #F57D31;
+}
+.fire-color {
+  color: #F57D31;
+}
+.flying, body:has(> .main-container.flying) {
+  background-color: #A891EC;
+}
+.flying-color {
+  color: #A891EC;
+}
+.ghost, body:has(> .main-container.ghost) {
+  background-color: #70559B;
+}
+.ghost-color {
+  color: #70559B;
+}
+.normal, body:has(> .main-container.normal) {
+  background-color: #AAA67F;
+}
+.normal-color {
+  color: #AAA67F;
+}
+.grass, body:has(> .main-container.grass) {
+  background-color: #74CB48;
+}
+.grass-color {
+  color: #74CB48;
+}
+.ground, body:has(> .main-container.ground) {
+  background-color: #DEC16B;
+}
+.ground-color {
+  color: #DEC16B;
+}
+.ice, body:has(> .main-container.ice) {
+  background-color: #9AD6DF;
+}
+.ice-color {
+  color: #9AD6DF;
+}
+.poison, body:has(> .main-container.poison) {
+  background-color: #A43E9E;
+}
+.poison-color {
+  color: #A43E9E;
+}
+.psychic, body:has(> .main-container.psychic) {
+  background-color: #FB5584;
+}
+.psychic-color {
+  color: #FB5584;
+}
+.rock, body:has(> .main-container.rock) {
+  background-color: #B69E31;
+}
+.rock-color {
+  color: #B69E31;
+}
+.steel, body:has(> .main-container.steel) {
+  background-color: #B7B9D0;
+}
+.steel-color {
+  color: #B7B9D0;
+}
+.water, body:has(> .main-container.water) {
+  background-color: #6493EB;
+}
+.water-color {
+  color: #6493EB;
 }

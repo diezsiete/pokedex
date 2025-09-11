@@ -10,15 +10,15 @@ export default function GridPage() {
     const [sortField, setSortField] = useState('name');
     const {loading, error, data} = usePokemonListQuery(search, sortField);
 
-    return <>
-        <header>
+    return <div className='main-container grid-page'>
+        <header className="grid-page-header">
             <div className="title">
-                <img src={pokeball} className="logo react" alt="Pokeball logo"/>
+                <img src={pokeball} alt="Pokeball logo"/>
                 <h1>Pokédex</h1>
             </div>
             <SearchBar search={search} sortField={sortField} onSearchChange={setSearch} onSortChange={setSortField}/>
         </header>
-        <main>
+        <main className='grid-page-main inner-shadow'>
             {loading ? (
                 <p>Loading...</p>
             ) : error || !data || !data.pokemons ? (
@@ -28,7 +28,7 @@ export default function GridPage() {
             )}
             {/*<PokemonSpecies search={search} sortField={sortFieldSelected} />*/}
         </main>
-    </>;
+    </div>;
 }
 
 // function PokemonSpecies({search = '', sortField = 'name'}: { search?: string; sortField?: string }) {

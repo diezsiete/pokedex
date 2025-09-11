@@ -5,7 +5,7 @@ import type { Pokemon } from "./types.ts";
  * Para un tipo de pokemon seleccionar el primer pokemon que solo sea de ese tipo
  * Util para saber el color de un tipo (aplica para pokemones con varios tipos, saber los colores despues del primero)
  */
-const GetTypeFirstPokemon: TypedDocumentNode<
+const GET_TYPE_FIRST_POKEMON: TypedDocumentNode<
     { pokemon: Pick<Pokemon, 'specy'>[] },
     { name: string }
 > = gql`
@@ -29,4 +29,4 @@ const GetTypeFirstPokemon: TypedDocumentNode<
     }
 `;
 
-export default GetTypeFirstPokemon;
+export default GET_TYPE_FIRST_POKEMON;

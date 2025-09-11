@@ -1,0 +1,195 @@
+.detail-page-header {
+    color: white;
+    padding: 12px 12px 0 12px;
+    flex: 3;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+}
+
+.detail-page-header .title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 16px 0;
+    color: white;
+    position: relative;
+}
+.detail-page-header .title a {
+    color: white;
+    text-decoration: none;
+}
+
+.detail-page-header .title .back-arrow {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.detail-page-header .title .pokemon-name {
+    font-size: 24px;
+    font-weight: bold;
+    flex-grow: 1;
+    margin-left: 15px;
+}
+.detail-page-header .title .pokemon-number {
+    font-weight: bold;
+}
+
+.detail-page-header .pokemon-image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.detail-page-header .pokemon-image {
+    width: 350px;
+    height: 350px;
+}
+
+.detail-page-header .pokeball-back {
+    height: 100%;
+    position: absolute;
+    right: 20px;
+    opacity: 0.15;
+}
+
+.detail-page-main {
+    flex: 7;
+    background-color: white;
+    border-radius: 20px;
+    padding: 100px 12px 12px;
+    margin: -100px 5px 5px;
+}
+
+.detail-page-main .content {
+    max-width: 760px;
+    margin: 0 auto;
+}
+
+
+.detail-page-main .content .type-badges {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.detail-page-main .content .type-badge {
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: capitalize;
+    color: white;
+}
+
+
+.detail-page-main .about-section {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.detail-page-main .about-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.detail-page-main .info-row {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.detail-page-main .info-item {
+    text-align: center;
+    flex: 1;
+}
+
+.detail-page-main .info-value {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 5px;
+}
+.detail-page-main .info-value span {
+    display: block;
+    text-transform: capitalize;
+}
+
+.detail-page-main .info-label {
+    font-size: 12px;
+    color: #888;
+}
+
+.detail-page-main .divider {
+    height: 1px;
+    background: #E0E0E0;
+    margin: 0 20px;
+}
+
+.detail-page-main .description {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #666;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+
+.detail-page-main .base-stats {
+    margin-top: 20px;
+}
+
+.detail-page-main .base-stats-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.detail-page-main .stat-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.detail-page-main .stat-name {
+    width: 60px;
+    font-size: 12px;
+    font-weight: 600;
+    text-align: right;
+    margin-right: 15px;
+    text-transform: uppercase;
+}
+
+.detail-page-main .stat-base {
+    width: 30px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    margin-right: 15px;
+}
+
+.detail-page-main .stat-bar {
+    flex-grow: 1;
+    height: 6px;
+    background: #E0E0E0;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.detail-page-main .stat-fill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.3s ease;
+}
+
+.stat-fill {
+    height: 100%;
+    width: calc(var(--value) / 200 * 100%);
+    transition: width 0.3s ease;
+}

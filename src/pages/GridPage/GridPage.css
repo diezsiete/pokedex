@@ -1,24 +1,28 @@
-header {
+.main-container.grid-page, body:has(> .main-container.grid-page) {
     background-color: #DC0A2D;
+}
+.grid-page-header {
     color: white;
     padding: 12px 12px 0 12px;
 }
 
-.title {
+.grid-page-header .title {
     display: flex;
     align-items: center;
     margin-bottom: 12px;
     gap: 16px;
 }
 
-.title h1 {
+.grid-page-header .title h1 {
     font-size: 24px;
     font-weight: 700;
 }
 
-main {
+.grid-page-main {
     flex: 1;
-    background: #DC0A2D;
-    padding: 0 5px 5px;
+    background-color: white;
+    padding: 24px 12px 12px;
+    border-radius: 20px;
+    margin: 0 5px 5px;
 }
 
