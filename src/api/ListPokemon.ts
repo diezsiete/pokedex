@@ -1,4 +1,4 @@
-import { type TypedDocumentNode, gql } from "@apollo/client";
+import {type TypedDocumentNode, gql} from "@apollo/client";
 import { useQuery } from "@apollo/client/react";
 import type { PokemonCard } from "./types.ts";
 
@@ -9,7 +9,9 @@ type ListVars = {
     offset: number;
 };
 
-export const LIMIT = 50;
+type ApolloResult = ReturnType<typeof useListPokemonQuery>;
+
+const LIMIT = 50;
 
 const LIST_POKEMON: TypedDocumentNode<
     { pokemons: PokemonCard[] },
@@ -36,7 +38,7 @@ export function useListPokemonQuery(search: string = '', sortField: string = 'na
     const where: ListVars['where'] = {};
     if (search.trim().length > 0) {
         where.name = {
-            _like: `${search}%`
+            _ilike: `${search}%`
         }
     }
 
@@ -50,3 +52,19 @@ export function useListPokemonQuery(search: string = '', sortField: string = 'na
         },
     });
 }
+
+export const fetchMoreListPokemon = (offset: number, fetchMore: ApolloResult['fetchMore']) => fetchMore({
+    variables: {
+        offset,
+        limit: LIMIT,
+    },
+    updateQuery: (prev, { fetchMoreResult }) => {
+        if (!fetchMoreResult) return prev;
+        return {
+            pokemons: [
+                ...prev.pokemons,
+                ...fetchMoreResult.pokemons,
+            ],
+        };
+    },
+})
