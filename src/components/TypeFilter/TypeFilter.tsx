@@ -5,6 +5,10 @@ import CustomSelect from "@components/CustomSelect/CustomSelect";
 import { ucfirst } from "@util/format.ts";
 import './TypeFilter.css'
 
+/**
+ * Para filtrar pokemones por su tipo.
+ * Realiza la consulta a api de los tipos solo cuando se abre por primera vez.
+ */
 export default function TypeFilter({ value, onChange }: {value: string, onChange?: (value: string) => void}) {
     const [options, setOptions] = useState<Record<string, string>|null>(null)
     const [listTypes] = useLazyQuery(LIST_TYPES);

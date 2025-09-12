@@ -1,7 +1,12 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 
 const KEY = 'favorites';
 
+/**
+ * Custom hook utilizado en contexto de favoritos
+ * Se guardan los ids de los pokemones favoritos en LocalStorage.
+ * En la seccion de favoritos la consulta se filtra por estos.
+ */
 export default function useFavorites() {
     const readValue = (): number[] => {
         try {
@@ -31,14 +36,6 @@ export default function useFavorites() {
     }, [favorites, save]);
 
     const isFavorite = useCallback((id: number) => favorites.includes(id), [favorites]);
-
-    useEffect(() => {
-        const onStorage = (e: StorageEvent) => {
-            if (e.key === KEY) setFavorites(readValue());
-        };
-        window.addEventListener("storage", onStorage);
-        return () => window.removeEventListener("storage", onStorage);
-    }, []);
 
     return { favorites, addFavorite, removeFavorite, isFavorite };
 }

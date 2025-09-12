@@ -2,6 +2,9 @@ import type { MouseEvent } from "react";
 import classNames from "classnames";
 import './FavoriteButton.css';
 
+/**
+ * Boton para agregar o ver favoritos
+ */
 export default function FavoriteButton({ active, onClick }: { active?: boolean, onClick?: (e: MouseEvent) => void } ) {
     return (
         <button className={classNames('favorite-button', { active })} onClick={e => onClick?.(e)}>

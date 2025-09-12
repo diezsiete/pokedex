@@ -14,6 +14,10 @@ type GridPageHeaderProps = {
     typeFilter: string
     onTypeFilterChange?: (typeFilter: string) => void
 };
+
+/**
+ * Encabezado para Grid de pokemones
+ */
 export default function GridPageHeader({
     inFavorites, onInFavoritesChange, onSearch, sortField, onSortFieldChange, typeFilter, onTypeFilterChange
 }: GridPageHeaderProps) {

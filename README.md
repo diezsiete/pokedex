@@ -1,69 +1,51 @@
-# React + TypeScript + Vite
+# Pokédex
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicación React que permite explorar los Pokémon y ver sus detalles.
+Construida con  **React + Vite** y alimentandose de PokéAPI  [GraphQL v1beta2](https://pokeapi.co/docs/graphql#v1beta2)
 
-Currently, two official plugins are available:
+Ver en vivo: https://diezsiete.github.io/pokedex/
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## Características
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **Navegar Pokémon** – Mirar lista de Pokémon con sus imagenes.
+- **Paginación / Scroll Infinto** – Cargar mas Pokémones dinamicamente.
+- **Realizar busquedas** – Permite buscar por nombre,  filtrar por tipo, ordenar por id y nombre
+- **Coleccionar pokemones favoritos** – Agregar y ver lista de mis pokemones favoritos
+- **Vista detallada** – Clic en Pokémon para ver, tipo, alto, peso, abilidades y estadísticas.
+- **Diseño responsivo** – Funciona en escritorio y celular.
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+## Tech Stack
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- **React** – UI
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+- **Vite** – Build
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- **Apollo** – GraphQL
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+---
+
+## Como usar
+
+### Clonar el repositorio
+
+`git clone https://github.com/diezsiete/pokedex.git cd pokedex`
+
+###  Instalar dependencias
+
+`npm install`
+
+### Correr el servidor de desarrollo
+
+`npm run dev`
+
+Aplicación estará disponible en **[http://localhost:5173](http://localhost:5173)**
+
+---
+
+## Build Producción
+
+`npm run build`

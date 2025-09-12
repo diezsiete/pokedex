@@ -1,9 +1,9 @@
 import type { Pokemon } from "@api/types.ts";
-import { formatStatBase, shortenStatName} from "@util/format.ts";
+import { formatStatBase, shortenStatName } from "@util/format.ts";
 import './DetailStats.css'
 
 /**
- * Estadísticas base de un pókemon
+ * Estadísticas base de un pókemon que se muestran en el detalle
  */
 export default function DetailStats({ pokemon }: { pokemon: Pokemon }) {
     const mainType = pokemon.types[0].type.name;

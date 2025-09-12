@@ -6,6 +6,9 @@ import { useFavoritesContext } from "@context/favorites/FavoritesContext.ts";
 import { formatPokemonName, formatPokemonId } from "@util/format";
 import './PokemonCard.css';
 
+/**
+ * Recuadros en Grid de pokemones, permite navegar a detalle y agregar a favoritos
+ */
 export default function PokemonCard({ pokemon }: { pokemon: PokemonCardType }) {
     const { addFavorite, removeFavorite, isFavorite } = useFavoritesContext();
     const [favorite, setFavorite] = useState(false);
@@ -15,7 +18,7 @@ export default function PokemonCard({ pokemon }: { pokemon: PokemonCardType }) {
     }, [pokemon, isFavorite]);
 
     const handleFavoriteClick = (e: MouseEvent) => {
-        e.stopPropagation();
+        e.stopPropagation(); // para que no se haga navegación al detalle del pokemon
         e.preventDefault();
         const newState = !favorite
         setFavorite(newState)

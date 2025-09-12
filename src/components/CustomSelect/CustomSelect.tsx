@@ -11,6 +11,9 @@ type CustomSelectProps = {
     className?: string
 };
 
+/**
+ * Select especial para encabezado que implementa el diseño requerido para la aplicación
+ */
 export default function CustomSelect({ options, value, legend, onChange, onShown, className, children }: CustomSelectProps & { children: ReactNode }) {
     const [showDropdown, setShowDropdown] = useState(false);
 

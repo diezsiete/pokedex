@@ -6,6 +6,10 @@ import Grid from "@components/Grid/Grid.tsx";
 import GridPageHeader from "@components/GridPageHeader/GridPageHeader.tsx";
 import './GridPage.css'
 
+/**
+ * Pagina principal
+ * Grid de pokemones consultados a la api
+ */
 export default function GridPage() {
     const [search, setSearch] = useState('');
     const [typeFilter, setTypeFilter] = useState('');

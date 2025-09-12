@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import magnifyingGlass from '@assets/magnifying-glass.svg'
 import './SearchBar.css';
 
+/**
+ * Input para buscar pokemones, realiza validación y debounce
+ */
 export default function SearchBar({ onSearch }: { onSearch: (query: string) => void }) {
     const [input, setInput] = useState('');
 
