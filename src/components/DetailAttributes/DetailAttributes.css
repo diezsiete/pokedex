@@ -1,0 +1,56 @@
+.detail-attributes .divider {
+    height: 1px;
+    background: #E0E0E0;
+    margin: 0 20px;
+}
+
+
+.detail-attributes.values,
+.detail-attributes.labels {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+    text-align: center;
+}
+@media (min-width: 360px) {
+    .detail-attributes.values,
+    .detail-attributes.labels {
+        grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    }
+}
+@media (min-width: 426px) {
+    .detail-attributes.values,
+    .detail-attributes.labels {
+        gap: 0.5rem;
+    }
+}
+
+.detail-attributes.values > div:not(:last-child),
+.detail-attributes.labels > div:not(:last-child) {
+    border-right: 1px solid #E0E0E0;
+}
+
+.detail-attributes.values > div {
+    font-size: 12px;
+    color: #1D1D1D;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+@media (min-width: 426px) {
+    .detail-attributes.values > div {
+        font-size: 16px;
+    }
+}
+.detail-attributes.values > div span {
+    text-transform: capitalize;
+}
+
+.detail-attributes.labels {
+    margin-bottom: 20px;
+}
+.detail-attributes.labels > div {
+    color: #666;
+    font-size: 12px;
+    padding-top: 10px;
+}

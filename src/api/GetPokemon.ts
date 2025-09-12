@@ -27,9 +27,12 @@ const GET_POKEMON: TypedDocumentNode<
                 description: pokemonspeciesflavortexts(where: {language_id: {_eq: 9}}, limit: 1) {
                     text: flavor_text
                 }
+                generation {
+                    id
+                }
             }
             sprites: pokemonsprites {
-                sprites
+                src: sprites(path: "other.official-artwork.front_default")
             }
             stats: pokemonstats {
                 id

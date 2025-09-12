@@ -8,7 +8,7 @@ export default function PokemonCard({ pokemon }: { pokemon: PokemonCardType }) {
         <Link to={`/${pokemon.name}`} className="pokemon-card">
             <div className="pokemon-half-background"></div>
             <div className="pokemon-number">{formatPokemonId(pokemon.id)}</div>
-            <img className='pokemon-image' src={pokemon.sprites[0].sprites.other['official-artwork']['front_default']} alt="pokemon-img"/>
+            <img className='pokemon-image' src={pokemon.sprites[0].src} alt="pokemon-img"/>
             <div className="pokemon-name">{formatPokemonName(pokemon.name)}</div>
         </Link>
     )

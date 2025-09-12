@@ -27,7 +27,7 @@ const LIST_POKEMON: TypedDocumentNode<
             id
             name
             sprites: pokemonsprites {
-                sprites
+                src: sprites(path: "other.official-artwork.front_default")
             }
         }
     }

@@ -1,10 +1,16 @@
 import { Link, useParams } from "react-router";
 import { useQuery } from "@apollo/client/react";
 import GET_POKEMON from "@api/GetPokemon.ts";
-import { formatPokemonId, formatPokemonMetric, formatPokemonName } from "@util/format.ts";
+import DetailAttributes from "@components/DetailAttributes/DetailAttributes.tsx";
+import DetailStats from "@components/DetailStats/DetailStats.tsx";
+import { formatPokemonId, formatPokemonName } from "@util/format.ts";
 import pokeball from '@assets/pokeball.svg'
 import './DetailPage.css'
 
+/**
+ * Pagina detalle de un pókemon
+ * El pókemon se obtiene por el nombre en la url
+ */
 export default function DetailPage() {
     const params = useParams();
     const {loading, error, data} = useQuery(GET_POKEMON, {
@@ -18,7 +24,6 @@ export default function DetailPage() {
 
     const mainType = pokemon.types[0].type.name;
 
-
     return <div className={`main-container detail-page ${mainType}`}>
         <header className='detail-page-header'>
             <img src={pokeball} alt="Pokeball logo" className='pokeball-back'/>
@@ -31,8 +36,7 @@ export default function DetailPage() {
             </div>
 
             <div className="pokemon-image-container">
-                <img className='pokemon-image'
-                     src={pokemon.sprites[0].sprites.other['official-artwork']['front_default']} alt="pokemon-img"/>
+                <img className='pokemon-image' src={pokemon.sprites[0].src} alt="pokemon-img"/>
                 {/*<div className="nav-arrow right">›</div>*/}
             </div>
         </header>
@@ -47,50 +51,14 @@ export default function DetailPage() {
                 <div className="about-section">
                     <h3 className={`about-title ${mainType}-color`}>About</h3>
 
-                    <div className="info-row">
-                        <div className="info-item">
-                            <div className="info-value">{formatPokemonMetric(pokemon.weight)} kg</div>
-                            <div className="info-label">Weight</div>
-                        </div>
-                        <div className="divider"></div>
-                        <div className="info-item">
-                            <div className="info-value">{formatPokemonMetric(pokemon.height)} m</div>
-                            <div className="info-label">Height</div>
-                        </div>
-                        <div className="divider"></div>
-                        <div className="info-item">
-                            <div className="info-value">{pokemon.abilities.map((ability, key) => (
-                                <span key={key}>{ability.ability.name}</span>
-                            ))}</div>
-                            <div className="info-label">Moves</div>
-                        </div>
-                    </div>
+                    <DetailAttributes pokemon={pokemon} />
 
                     <p className="description">
                         {pokemon.specy.description[0].text}
                     </p>
                 </div>
 
-                <div className="base-stats">
-                    <h3 className={`base-stats-title ${mainType}-color`}>Base Stats</h3>
-                    {pokemon.stats.map(stat => (
-                        <div className="stat-row" key={stat.id}>
-                            <span className={`stat-name ${mainType}-color`}>{stat.stat.name}</span>
-                            <span className="stat-base">{stat.base}</span>
-                            <div className="stat-bar">
-                                {/*<div className={`stat-fill ${mainType}`} style={{width: stat.base}}></div>*/}
-
-                                <div
-                                    className={`stat-fill ${mainType}`}
-                                    style={{
-                                        // Pass the value to a CSS custom property
-                                        ["--value" as never]: stat.base,
-                                    }}
-                                />
-                            </div>
-                        </div>
-                    ))}
-                </div>
+                <DetailStats pokemon={pokemon} />
             </div>
         </main>
     </div>

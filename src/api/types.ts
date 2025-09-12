@@ -4,7 +4,7 @@ export type Pokemon = {
     height: number;
     weight: number,
     abilities: Ability[]
-    sprites: Sprites[];
+    sprites: { 'src': string }[];
     specy: Specy
     stats: Stat[]
     types: Type[];
@@ -24,16 +24,9 @@ type Specy = {
     }
     description: {
         text: string
-    }[]
-}
-
-type Sprites = {
-    sprites: {
-        other: {
-            'official-artwork': {
-                'front_default': string
-            }
-        }
+    }[];
+    generation: {
+        id: number
     }
 }
 

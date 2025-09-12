@@ -98,38 +98,6 @@
     margin-bottom: 20px;
 }
 
-.detail-page-main .info-row {
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 20px;
-}
-
-.detail-page-main .info-item {
-    text-align: center;
-    flex: 1;
-}
-
-.detail-page-main .info-value {
-    font-size: 16px;
-    font-weight: 600;
-    color: #333;
-    margin-bottom: 5px;
-}
-.detail-page-main .info-value span {
-    display: block;
-    text-transform: capitalize;
-}
-
-.detail-page-main .info-label {
-    font-size: 12px;
-    color: #888;
-}
-
-.detail-page-main .divider {
-    height: 1px;
-    background: #E0E0E0;
-    margin: 0 20px;
-}
 
 .detail-page-main .description {
     font-size: 14px;
@@ -137,59 +105,4 @@
     color: #666;
     margin-bottom: 30px;
     text-align: center;
-}
-
-
-.detail-page-main .base-stats {
-    margin-top: 20px;
-}
-
-.detail-page-main .base-stats-title {
-    font-size: 18px;
-    font-weight: 600;
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-.detail-page-main .stat-row {
-    display: flex;
-    align-items: center;
-    margin-bottom: 12px;
-}
-
-.detail-page-main .stat-name {
-    width: 60px;
-    font-size: 12px;
-    font-weight: 600;
-    text-align: right;
-    margin-right: 15px;
-    text-transform: uppercase;
-}
-
-.detail-page-main .stat-base {
-    width: 30px;
-    font-size: 14px;
-    font-weight: 600;
-    color: #333;
-    margin-right: 15px;
-}
-
-.detail-page-main .stat-bar {
-    flex-grow: 1;
-    height: 6px;
-    background: #E0E0E0;
-    border-radius: 3px;
-    overflow: hidden;
-}
-
-.detail-page-main .stat-fill {
-    height: 100%;
-    border-radius: 3px;
-    transition: width 0.3s ease;
-}
-
-.stat-fill {
-    height: 100%;
-    width: calc(var(--value) / 200 * 100%);
-    transition: width 0.3s ease;
 }
