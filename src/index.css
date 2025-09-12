@@ -20,6 +20,10 @@ input {
   font-family: "Poppins", sans-serif;
 }
 
+a {
+  text-decoration: none;
+}
+
 .inner-shadow {
   box-shadow: 0 1px 3px 1px #00000040 inset;
 }

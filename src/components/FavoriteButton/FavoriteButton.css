@@ -1,0 +1,14 @@
+.favorite-button {
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    background-color: transparent;
+}
+.favorite-button .star {
+    color: transparent;
+}
+.favorite-button.active .star {
+    color: gold;
+}

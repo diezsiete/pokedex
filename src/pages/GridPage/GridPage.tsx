@@ -1,21 +1,28 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useQuery } from "@apollo/client/react";
-import { fetchMoreListPokemon, LIST_POKEMON, LIMIT } from "@api/ListPokemon.ts";
+import { LIST_POKEMON, LIMIT, fetchMoreListPokemon } from "@api/ListPokemon.ts";
 import SearchBar from "@components/SearchBar/SearchBar";
 import Grid from "@components/Grid/Grid.tsx";
 import SortField from "@components/SortField/SortField.tsx";
+import FavoriteButton from "@components/FavoriteButton/FavoriteButton.tsx";
+import { useFavoritesContext } from "@context/favorites/FavoritesContext";
 import pokeball from '@assets/pokeball.svg'
 import './GridPage.css'
 
 export default function GridPage() {
     const [search, setSearch] = useState('');
     const [sortField, setSortField] = useState('name');
+    const {favorites} = useFavoritesContext();
+    const [inFavorites, setInFavorites] = useState(false)
 
     return <div className='main-container grid-page'>
         <header className="grid-page-header">
             <div className="title">
-                <img src={pokeball} alt="Pokeball logo"/>
-                <h1>Pokédex</h1>
+                <div className='brand'>
+                    <img src={pokeball} alt="Pokeball logo"/>
+                    <h1>Pokédex</h1>
+                </div>
+                <FavoriteButton active={inFavorites} onClick={() => setInFavorites(!inFavorites)} />
             </div>
             <div className="filters">
                 <SearchBar onSearch={setSearch} />
@@ -23,14 +30,16 @@ export default function GridPage() {
             </div>
         </header>
 
-        <PokemonApiGrid search={search} sortField={sortField} />
+        <PokemonApiGrid search={search} sortField={sortField} ids={inFavorites ? favorites : undefined} infiniteScroll={!inFavorites} />
     </div>;
 }
 
-function PokemonApiGrid({ search, sortField }: { search: string, sortField: string }) {
+type PokemonApiGridProps = { search: string, sortField: string, ids?: number[], infiniteScroll?: boolean };
+
+function PokemonApiGrid({ search, sortField, ids, infiniteScroll }: PokemonApiGridProps) {
     const loadMoreRef = useRef<HTMLDivElement | null>(null);
     const {loading, error, data, fetchMore} = useQuery(LIST_POKEMON, {variables: {
-        likeName: search ? `%${search}%` : '%',
+        where: {name: {_ilike: search ? `%${search}%` : '%'}, ...(ids ? {id: {_in: ids}} : {})},
         orderBy: [{[sortField]: 'asc'}],
         limit: LIMIT,
         offset: 0,
@@ -58,7 +67,7 @@ function PokemonApiGrid({ search, sortField }: { search: string, sortField: stri
             {!pokemons.length || error
                 ? <p>{error ? 'Error :(' : (loading ? 'Loading...' : 'Not found')}</p>
                 : <Grid pokemons={pokemons}/>}
-            <div ref={loadMoreRef} className="h-10 col-span-full"></div>
+            {infiniteScroll && <div ref={loadMoreRef} className="h-10 col-span-full"></div>}
         </main>
     )
 }
