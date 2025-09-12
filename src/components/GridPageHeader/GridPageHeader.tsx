@@ -1,7 +1,8 @@
 import pokeball from "@assets/pokeball.svg";
 import FavoriteButton from "@components/FavoriteButton/FavoriteButton.tsx";
 import SearchBar from "@components/SearchBar/SearchBar.tsx";
-import CustomSelect from "@components/CustomSelect/CustomSelect.tsx";
+import TypeFilter from "@components/TypeFilter/TypeFilter.tsx";
+import SortField from "@components/SortField/SortField.tsx";
 import './GridPageHeader.css';
 
 type GridPageHeaderProps = {
@@ -9,10 +10,12 @@ type GridPageHeaderProps = {
     onInFavoritesChange: (inFavorites: boolean) => void,
     onSearch: (query: string) => void,
     sortField: string,
-    onSortFieldChange?: (field: string) => void
+    onSortFieldChange?: (field: string) => void,
+    typeFilter: string
+    onTypeFilterChange?: (typeFilter: string) => void
 };
 export default function GridPageHeader({
-    inFavorites, onInFavoritesChange, onSearch, sortField, onSortFieldChange
+    inFavorites, onInFavoritesChange, onSearch, sortField, onSortFieldChange, typeFilter, onTypeFilterChange
 }: GridPageHeaderProps) {
     return (
         <header className="grid-page-header">
@@ -25,9 +28,8 @@ export default function GridPageHeader({
             </div>
             <div className="filters">
                 <SearchBar onSearch={onSearch}/>
-                <CustomSelect options={{'id': 'Number', 'name': 'Name'}} value={sortField} onChange={onSortFieldChange}>
-                    {sortField === 'name' ? 'A' : '#'}
-                </CustomSelect>
+                <TypeFilter value={typeFilter} onChange={onTypeFilterChange} />
+                <SortField sortField={sortField} onSortFieldChange={onSortFieldChange} />
             </div>
         </header>
     )

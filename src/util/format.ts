@@ -17,7 +17,7 @@ export const formatStatBase = (base: number) => String(base).padStart(3, '0');
 /**
  * Uppercase first letter of string
  */
-const ucfirst = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
+export const ucfirst = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
 
 const match = <T extends string | number, R>(value: T, cases: Record<T, R>, defaultValue?: R): R =>
     Object.prototype.hasOwnProperty.call(cases, value) ? cases[value] : (defaultValue as R);

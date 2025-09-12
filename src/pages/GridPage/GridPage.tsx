@@ -8,6 +8,7 @@ import './GridPage.css'
 
 export default function GridPage() {
     const [search, setSearch] = useState('');
+    const [typeFilter, setTypeFilter] = useState('');
     const [sortField, setSortField] = useState('name');
     const {favorites} = useFavoritesContext();
     const [inFavorites, setInFavorites] = useState(false)
@@ -17,20 +18,40 @@ export default function GridPage() {
             inFavorites={inFavorites}
             onInFavoritesChange={setInFavorites}
             onSearch={setSearch}
+            typeFilter={typeFilter}
+            onTypeFilterChange={setTypeFilter}
             sortField={sortField}
             onSortFieldChange={setSortField}
         />
 
-        <PokemonApiGrid search={search} sortField={sortField} ids={inFavorites ? favorites : undefined} infiniteScroll={!inFavorites} />
+        <PokemonApiGrid
+            search={search}
+            sortField={sortField}
+            typeFilter={typeFilter}
+            ids={inFavorites ? favorites : undefined}
+            infiniteScroll={!inFavorites}
+        />
     </div>;
 }
 
-type PokemonApiGridProps = { search: string, sortField: string, ids?: number[], infiniteScroll?: boolean };
+type PokemonApiGridProps = { search: string, sortField: string, typeFilter: string, ids?: number[], infiniteScroll?: boolean };
 
-function PokemonApiGrid({ search, sortField, ids, infiniteScroll }: PokemonApiGridProps) {
+function PokemonApiGrid({ search, sortField, typeFilter, ids, infiniteScroll }: PokemonApiGridProps) {
     const loadMoreRef = useRef<HTMLDivElement | null>(null);
     const {loading, error, data, fetchMore} = useQuery(LIST_POKEMON, {variables: {
-        where: {name: {_ilike: search ? `%${search}%` : '%'}, ...(ids ? {id: {_in: ids}} : {})},
+        where: {
+            name: {_ilike: search ? `%${search}%` : '%'},
+            ...(ids ? {id: {_in: ids}} : {}),
+            ...(typeFilter ? {
+                pokemontypes:  {
+                    type:  {
+                        name:  {
+                            _eq: typeFilter
+                        }
+                    }
+                }
+            } : {})
+        },
         orderBy: [{[sortField]: 'asc'}],
         limit: LIMIT,
         offset: 0,

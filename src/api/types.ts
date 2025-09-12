@@ -38,6 +38,6 @@ type Stat = {
     }
 }
 
-type Type = {
+export type Type = {
     type: { name: string };
 }

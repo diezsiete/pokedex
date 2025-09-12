@@ -43,9 +43,6 @@
     display: block;
     color: #1D1D1D;
 }
-.custom-select-dropdown label:first-child {
-    margin-bottom: 10px;
-}
 
 .custom-select-dropdown input {
     margin-right: 10px;
