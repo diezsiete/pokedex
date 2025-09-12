@@ -1,7 +1,7 @@
-.sort-field {
+.custom-select {
     position: relative;
 }
-.sort-field .trigger-button {
+.custom-select .trigger-button {
     width: 40px;
     height: 40px;
     background-color: white;
@@ -12,7 +12,8 @@
     cursor: pointer;
 }
 
-.sort-card {
+
+.custom-select-dropdown {
     display: none;
     position: absolute;
     right: 0;
@@ -23,40 +24,40 @@
     top: 120%;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
 }
-.sort-card.shown {
+.custom-select-dropdown.shown {
     display: block;
 }
 
-.sort-card .legend {
+.custom-select-dropdown .legend {
     font-weight: bold;
     margin: 15px 0 15px 15px;
 }
 
-.sort-card .radio-group {
+.custom-select-dropdown .radio-group {
     background-color: white;
     border-radius: 10px;
     padding: 20px;
 }
 
-.sort-card label {
+.custom-select-dropdown label {
     display: block;
     color: #1D1D1D;
 }
-.sort-card label:first-child {
+.custom-select-dropdown label:first-child {
     margin-bottom: 10px;
 }
 
-.sort-card input {
+.custom-select-dropdown input {
     margin-right: 10px;
 }
 
-.sort-field-open-overlay {
+.custom-select-open-overlay {
     display: none;
     position: fixed;
     inset: 0;
     background: rgba(0, 0, 0, 0.5);
     z-index: 9;
 }
-.sort-field-open-overlay.shown {
+.custom-select-open-overlay.shown {
     display: block;
 }
