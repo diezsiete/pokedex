@@ -1,25 +1,24 @@
-import {type TypedDocumentNode, gql} from "@apollo/client";
+import { type TypedDocumentNode, gql } from "@apollo/client";
 import { useQuery } from "@apollo/client/react";
 import type { PokemonCard } from "./types.ts";
 
-type ListVars = {
-    where: {[k: string]: string|object};
+type ListPokemonVars = {
+    likeName: string
     orderBy: {[k: string]: string}[];
     limit: number;
     offset: number;
 };
 
-type ApolloResult = ReturnType<typeof useListPokemonQuery>;
+type ListPokemonResult = { pokemons: PokemonCard[] }
 
-const LIMIT = 50;
+type ApolloResult = useQuery.Result<ListPokemonResult, ListPokemonVars>;
 
-const LIST_POKEMON: TypedDocumentNode<
-    { pokemons: PokemonCard[] },
-    ListVars
-> = gql`
-    query ListPokemon($where: pokemon_bool_exp, $orderBy: [pokemon_order_by!], $limit: Int, $offset: Int) {
+export const LIMIT = 50;
+
+export const LIST_POKEMON: TypedDocumentNode<ListPokemonResult, ListPokemonVars> = gql`
+    query GetPokemons($likeName: String, $orderBy: [pokemon_order_by!], $limit: Int, $offset: Int) {
         pokemons: pokemon(
-            where: $where
+            where: {name: {_ilike: $likeName}}
             order_by: $orderBy
             limit: $limit
             offset: $offset
@@ -32,26 +31,6 @@ const LIST_POKEMON: TypedDocumentNode<
         }
     }
 `;
-
-
-export function useListPokemonQuery(search: string = '', sortField: string = 'name') {
-    const where: ListVars['where'] = {};
-    if (search.trim().length > 0) {
-        where.name = {
-            _ilike: `${search}%`
-        }
-    }
-
-    // Pass the merged object as the 'where' variable.
-    return useQuery(LIST_POKEMON, {
-        variables: {
-            where,
-            orderBy: [{[sortField]: 'asc'}],
-            limit: LIMIT,
-            offset: 0,
-        },
-    });
-}
 
 export const fetchMoreListPokemon = (offset: number, fetchMore: ApolloResult['fetchMore']) => fetchMore({
     variables: {
