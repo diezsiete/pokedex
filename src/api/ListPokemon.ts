@@ -1,5 +1,4 @@
 import { type TypedDocumentNode, gql } from "@apollo/client";
-import { useQuery } from "@apollo/client/react";
 import type { PokemonCard } from "./types.ts";
 
 type ListPokemonVars = {
@@ -10,8 +9,6 @@ type ListPokemonVars = {
 };
 
 type ListPokemonResult = { pokemons: PokemonCard[] }
-
-type ApolloResult = useQuery.Result<ListPokemonResult, ListPokemonVars>;
 
 export const LIMIT = 50;
 
@@ -31,19 +28,3 @@ export const LIST_POKEMON: TypedDocumentNode<ListPokemonResult, ListPokemonVars>
         }
     }
 `;
-
-export const fetchMoreListPokemon = (offset: number, fetchMore: ApolloResult['fetchMore']) => fetchMore({
-    variables: {
-        offset,
-        limit: LIMIT,
-    },
-    updateQuery: (prev, { fetchMoreResult }) => {
-        if (!fetchMoreResult) return prev;
-        return {
-            pokemons: [
-                ...prev.pokemons,
-                ...fetchMoreResult.pokemons,
-            ],
-        };
-    },
-})
