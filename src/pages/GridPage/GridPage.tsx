@@ -1,12 +1,9 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useQuery } from "@apollo/client/react";
 import { LIST_POKEMON, LIMIT, fetchMoreListPokemon } from "@api/ListPokemon.ts";
-import SearchBar from "@components/SearchBar/SearchBar";
-import Grid from "@components/Grid/Grid.tsx";
-import SortField from "@components/SortField/SortField.tsx";
-import FavoriteButton from "@components/FavoriteButton/FavoriteButton.tsx";
 import { useFavoritesContext } from "@context/favorites/FavoritesContext";
-import pokeball from '@assets/pokeball.svg'
+import Grid from "@components/Grid/Grid.tsx";
+import GridPageHeader from "@components/GridPageHeader/GridPageHeader.tsx";
 import './GridPage.css'
 
 export default function GridPage() {
@@ -16,19 +13,13 @@ export default function GridPage() {
     const [inFavorites, setInFavorites] = useState(false)
 
     return <div className='main-container grid-page'>
-        <header className="grid-page-header">
-            <div className="title">
-                <div className='brand'>
-                    <img src={pokeball} alt="Pokeball logo"/>
-                    <h1>Pokédex</h1>
-                </div>
-                <FavoriteButton active={inFavorites} onClick={() => setInFavorites(!inFavorites)} />
-            </div>
-            <div className="filters">
-                <SearchBar onSearch={setSearch} />
-                <SortField field={sortField} onChange={setSortField} />
-            </div>
-        </header>
+        <GridPageHeader
+            inFavorites={inFavorites}
+            onInFavoritesChange={setInFavorites}
+            onSearch={setSearch}
+            sortField={sortField}
+            onSortFieldChange={setSortField}
+        />
 
         <PokemonApiGrid search={search} sortField={sortField} ids={inFavorites ? favorites : undefined} infiniteScroll={!inFavorites} />
     </div>;

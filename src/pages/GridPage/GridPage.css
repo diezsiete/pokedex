@@ -1,28 +1,6 @@
 .main-container.grid-page, body:has(> .main-container.grid-page) {
     background-color: #DC0A2D;
 }
-.grid-page-header {
-    color: white;
-    padding: 12px 12px 0 12px;
-}
-
-.grid-page-header .title {
-    display: flex;
-    align-items: center;
-    margin-bottom: 12px;
-    justify-content: space-between;
-}
-
-.grid-page-header .title .brand {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-}
-
-.grid-page-header .title h1 {
-    font-size: 24px;
-    font-weight: 700;
-}
 
 .grid-page-main {
     flex: 1;
